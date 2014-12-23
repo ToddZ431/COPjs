@@ -1,11 +1,15 @@
 ﻿define([
-	"dojo/_base/declare",
+    "dojo/_base/declare",
+    "dojo/_base/array",
+	"esri/dijit/PopupTemplate",
 	"esri/layers/ArcGISDynamicMapServiceLayer",
 	"esri/layers/FeatureLayer",
 	"esri/layers/ArcGISTiledMapServiceLayer",
     "esri/layers/WMSLayer"],
 	function (
         declare,
+        arrayUtils,
+		PopupTemplate,
 		ArcGISDynamicMapServiceLayer,
 		FeatureLayer,
 		ArcGISTiledMapServiceLayer,
@@ -34,10 +38,18 @@
 				this.DisableClientCaching = options.DisableClientCaching || false;
 				this.MaxScale = options.MaxScale || 0;
 				this.MinScale = options.MinScale || 0;
+				this.PopupInfo = options.PopupInfo || null;
+				this.PopupInfos = options.PopupInfos || [ ];
 			},
 			
 			createLayer: function() {
-				var layer = null;
+			    var layer = null;
+                var infoTemplates = null
+			    if (this.PopupInfos.length > 0) {
+			        infoTemplates = this.makeInfoTemplates(this.PopupInfos);
+			        alert(infoTemplates.length.toString());
+			    }
+
 				switch (this.LayerType) {
 					case "dynamic":
 					case "Dynamic":
@@ -65,6 +77,10 @@
 						if (layer) {
 							layer.setMaxScale(this.MaxScale);
 							layer.setMinScale(this.MinScale);
+							if (this.PopupInfo) {
+							    try { layer.setInfoTemplate(new PopupTemplate(this.PopupInfo)); }
+								catch(err) { console.error(this.Label + " PopupTemplate error: " + err.description);}
+							}
 						}
 						break;
 					case "tiled":
@@ -98,6 +114,16 @@
 				}
 				
 				return layer;
+			},
+
+			makeInfoTemplates: function (PopupInfos) {
+			    var objString = "{[";
+			    arrayUtils.forEach(PopupInfos, function (info) {
+			        objString = '{"' + info.Layer.toString() + '": {' +
+                                '"infoTemplate": ' + JSON.stringify(new PopupTemplate(info.PopupInfo)) + '}},'
+			    });
+			    objString = objString.substr(0, objString.length - 1) + ']}';
+			    return JSON.parse(objString);
 			}
 		});
 	}

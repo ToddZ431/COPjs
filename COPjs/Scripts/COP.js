@@ -1,11 +1,14 @@
-﻿var map, urlObject;
+﻿var map, urlObject, windowWidth, popup;
 
 require([
     "Config/DefaultConfig",
 	"COP/LayerFactory",
     "dojo/_base/array",
+    "dojo/dom-construct",
     "esri/map",
     "esri/config",
+    "esri/dijit/Popup",
+    "esri/dijit/PopupMobile",
     "esri/tasks/GeometryService",
     "esri/urlUtils",
     "dojo/domReady!"
@@ -14,8 +17,11 @@ function (
     mapConfig,
 	layerFactory,
     arrayUtils,
+    domConstruct,
     Map,
     esriConfig,
+    Popup,
+    PopupMobile,
     GeometryService,
     urlUtils) {
 
@@ -68,10 +74,20 @@ function (
         level = mapConfig.InitialExtent.Level;
     console.log("Initial Center: " + centerLat + ", " + centerLng + " Level: " + level);
 
+    // if window is small, use mobile popup
+    windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    if (windowWidth < 600) {
+        popup = new PopupMobile(null, domConstruct.create("div"));
+    }
+    else {
+        popup = new Popup({ anchor: "auto", titleInBody: false }, domConstruct.create("div", { class: "dark" }));
+    }
+
     map = new Map("mapDiv", {
         center: [centerLng, centerLat ],
         zoom: level,
-        basemap: "streetBasemap"
+        basemap: "streetBasemap",
+        infoWindow: popup
     });
 
     map.on("load", initLayers);

@@ -5,13 +5,21 @@
         CenterLatitude: 41.774971,
         Level: 13
     },
+    Proxy: {
+        AlwaysUseProxy: false,
+        DefaultProxyUrl: "Proxy/Proxy.ashx",
+        ProxyRules: [
+            {urlPrefix: "traffic.arcgis.com", proxyUrl: "Proxy/Proxy.ashx"}
+        ]
+    },
     Basemaps: {
         StreetBasemapLayers: [
             { url: "http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer" },
             { url: "http://tryitlive.arcgis.com/arcgis/rest/services/PublicSafety/MapServer" }
         ],
         ImageryBasemapLayers: [
-            { url: "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer" }
+            { url: "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer" },
+			{ url: "http://tryitlive.arcgis.com/arcgis/rest/services/ReferenceOverlay/MapServer" }
         ]
     },
     OperationalLayers: [
@@ -25,7 +33,17 @@
             Opacity: 0.9,
             DisableClientCaching: true,
             MaxScale: 0,
-            MinScale: 0
+            MinScale: 0,
+            PopupInfos: [
+                {
+                    Layer: 1,
+                    PopupInfo: {
+                        title: "{TYPE}",
+                        description: "LOC: {LOC}<br />" +
+                                     "Source: {PLUMESRC}"
+                    }
+                }
+            ]
         },
         {
             Label: "Shelters",
@@ -36,7 +54,12 @@
             Opacity: 0.8,
             DisableClientCaching: true,
             MaxScale: 0,
-            MinScale: 0
+            MinScale: 0,
+			PopupInfo: { 
+				title: "{FACNAME}",
+				description: "Organization: {ORGANIZ}<br />" +
+                         "Telephone: {POCPHONE}"
+			}
         },
         {
             Label: "Radar",
@@ -49,14 +72,7 @@
             MaxScale: 0,
             MinScale: 0
         }
-    ],
-    Proxy: {
-        AlwaysUseProxy: false,
-        DefaultProxyUrl: "Proxy/Proxy.ashx",
-        ProxyRules: [
-            {urlPrefix: "traffic.arcgis.com", proxyUrl: "Proxy/Proxy.ashx"}
-        ]
-    }
+    ]
 });
 
 
@@ -66,7 +82,7 @@
 {
     Label: "Layer Name",                        // Required. Descriptive title of the layer
     LayerType: "dynamic",                       // Required. dynamic, tiled, feature, wms
-    Url: "http://svrarcgis2/path/to/MapServer", // Required. URL to map service
+    Url: "http://host/path/to/MapServer",       // Required. URL to map service
     Visible: true,                              // Default visibility of the layer, true or false
     VisibleLayers: [ ],                         // Array of visible layers within the map service, [1,2,3], or empty [ ] to use default layers from service
     RefreshInterval: 0,                         // Time in minutes to automatically refresh the layer, 0 for no refresh
@@ -74,6 +90,11 @@
     DisableClientCaching: true,                 // Disable browser caching of the layer, true or false
     MaxScale: 0,                                // Maximum zoomed in scale to display the layer
     MinScale: 0                                 // Minimum zoomed out scale to display the layer
+	PopupInfo: { PopupTemplate }                // For LayerType = "feature": PopupTemplate object. See: https://developers.arcgis.com/javascript/jshelp/intro_popuptemplate.html
+    PopupInfos: [{Layer: 1,                     // For LayerType = "dynamic" or "tiled": Array of layer indexes and PopupTemplate objects
+                  PopupInfo: { PopupTemplate }  //     to define popups for layers within the map service.
+                 }
+                ]
 }
 
 */

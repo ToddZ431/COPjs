@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Situation Display</title>
+    <title>COP Viewer</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,13 +13,14 @@
     <link rel="stylesheet" href="Styles/Default.css" />
 
     <script>
+        var rootPath = location.pathname.replace(/\/[^/]*$/, "");
         var dojoConfig = {
             packages: [{
                 name: "Config",
-                location: location.pathname.replace(/\/[^/]+$/, '') + '/Config'
+                location: rootPath + '/Config'
             }, {
                 name: "COP",
-                location: location.pathname.replace(/\/[^/]+$/, '') + '/Scripts/COPModules'
+                location: rootPath + '/Scripts/COPModules'
             }],
             parseOnLoad: true,
             async: true
