@@ -5,6 +5,9 @@ require([
 	"COP/LayerFactory",
     "dojo/_base/array",
     "dojo/dom-construct",
+    "dojox/mobile",
+    "dojox/mobile/parser",
+    "dojox/mobile/deviceTheme",
     "esri/map",
     "esri/config",
     "esri/dijit/Popup",
@@ -18,6 +21,9 @@ function (
 	layerFactory,
     arrayUtils,
     domConstruct,
+    mobile,
+    parser,
+    dTheme,
     Map,
     esriConfig,
     Popup,
@@ -26,8 +32,10 @@ function (
     urlUtils) {
 
     urlObject = urlUtils.urlToObject(window.location.href);
+    parser.parse();
+    mobile.hideAddressBar();
 
-    //default configuration
+    //esri configuration
     esriConfig.defaults.io.alwaysUseProxy = mapConfig.Proxy.AlwaysUseProxy;
     esriConfig.defaults.io.proxyUrl = mapConfig.Proxy.DefaultProxyUrl;
     esriConfig.defaults.geometryService = new GeometryService(mapConfig.GeometryServiceUrl);
@@ -38,13 +46,13 @@ function (
     });
 
     //basemaps
-    esriConfig.defaults.map.basemaps.streetBasemap = {
-        baseMapLayers: mapConfig.Basemaps.StreetBasemapLayers,
-        title: "Streets"
+    esriConfig.defaults.map.basemaps.copBasemap1 = {
+        baseMapLayers: mapConfig.Basemaps.COPBasemap1.Layers,
+        title: mapConfig.Basemaps.COPBasemap1.Label
     };
-    esriConfig.defaults.map.basemaps.imageryBasemap = {
-        baseMapLayers: mapConfig.Basemaps.ImageryBasemapLayers,
-        title: "Imagery"
+    esriConfig.defaults.map.basemaps.copBasemap2 = {
+        baseMapLayers: mapConfig.Basemaps.COPBasemap2.Layers,
+        title: mapConfig.Basemaps.COPBasemap2.Label
     };
 
     //get initial extent from url parameters
@@ -80,13 +88,13 @@ function (
         popup = new PopupMobile(null, domConstruct.create("div"));
     }
     else {
-        popup = new Popup({ anchor: "auto", titleInBody: false }, domConstruct.create("div", { class: "dark" }));
+        popup = new Popup({ anchor: "auto", titleInBody: false, visibleWhenEmpty: false }, domConstruct.create("div", { class: "dark" }));
     }
 
     map = new Map("mapDiv", {
         center: [centerLng, centerLat ],
         zoom: level,
-        basemap: "streetBasemap",
+        basemap: "copBasemap1",
         infoWindow: popup
     });
 

@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
     <link rel="stylesheet" href="http://js.arcgis.com/3.11/esri/css/esri.css" />
-    <link rel="stylesheet" href="http://js.arcgis.com/3.11/dijit/themes/claro/claro.css" />
     <link rel="stylesheet" href="Styles/Default.css" />
 
     <script>
@@ -22,14 +21,14 @@
                 name: "COP",
                 location: rootPath + '/Scripts/COPModules'
             }],
-            parseOnLoad: true,
-            async: true
+            async: true,
+            mblAlwaysHideAddressBar: true
         };
     </script>
     <script src="http://js.arcgis.com/3.11compact/"></script>
     <script src="Scripts/COP.js"></script>
 </head>
-<body class="claro" style="background-color: #202020">
+<body style="background-color: #202020">
     <div id="mapDiv"></div>
 </body>
 </html>

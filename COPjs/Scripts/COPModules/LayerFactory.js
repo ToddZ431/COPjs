@@ -1,7 +1,7 @@
 ﻿define([
     "dojo/_base/declare",
     "dojo/_base/array",
-	"esri/dijit/PopupTemplate",
+    "esri/InfoTemplate",
 	"esri/layers/ArcGISDynamicMapServiceLayer",
 	"esri/layers/FeatureLayer",
 	"esri/layers/ArcGISTiledMapServiceLayer",
@@ -9,7 +9,7 @@
 	function (
         declare,
         arrayUtils,
-		PopupTemplate,
+        InfoTemplate,
 		ArcGISDynamicMapServiceLayer,
 		FeatureLayer,
 		ArcGISTiledMapServiceLayer,
@@ -19,23 +19,27 @@
 			Label: null,
 			LayerType: null,
 			Url: null,
-			Visible: null,
+			Visible: true,
 			VisibleLayers: null,
 			RefreshInterval: null,
 			Opacity: null,
-			DisableClientCaching: null,
+			DisableClientCaching: false,
 			MaxScale: null,
 			MinScale: null,
+			PopupInfo: null,
+	        PopupInfos: null,
 			
 			constructor: function(options) {
 				this.Label = options.Label || "";
 				this.LayerType = options.LayerType;
 				this.Url = options.Url;
-				this.Visible = options.Visible || true;
+                if (options.Visible !== undefined)
+				    this.Visible = options.Visible;
 				this.VisibleLayers = options.VisibleLayers || [ ];
 				this.RefreshInterval = options.RefreshInterval || 0;
 				this.Opacity = options.Opacity || 1.0;
-				this.DisableClientCaching = options.DisableClientCaching || false;
+                if (options.DisableClientCaching !== undefined)
+				    this.DisableClientCaching = options.DisableClientCaching;
 				this.MaxScale = options.MaxScale || 0;
 				this.MinScale = options.MinScale || 0;
 				this.PopupInfo = options.PopupInfo || null;
@@ -47,7 +51,6 @@
                 var infoTemplates = null
 			    if (this.PopupInfos.length > 0) {
 			        infoTemplates = this.makeInfoTemplates(this.PopupInfos);
-			        alert(infoTemplates.length.toString());
 			    }
 
 				switch (this.LayerType) {
@@ -63,7 +66,11 @@
 							layer.setMaxScale(this.MaxScale);
 							layer.setMinScale(this.MinScale);
 							if (this.VisibleLayers.length > 0)
-								layer.setVisibleLayers(this.VisibleLayers);
+							    layer.setVisibleLayers(this.VisibleLayers);
+							if (infoTemplates) {
+							    try { layer.setInfoTemplates(infoTemplates); }
+							    catch (err) { console.error(this.Label + " PopupInfo error: " + err.description); }
+							}
 						}
 						break;
 					case "feature":
@@ -78,8 +85,8 @@
 							layer.setMaxScale(this.MaxScale);
 							layer.setMinScale(this.MinScale);
 							if (this.PopupInfo) {
-							    try { layer.setInfoTemplate(new PopupTemplate(this.PopupInfo)); }
-								catch(err) { console.error(this.Label + " PopupTemplate error: " + err.description);}
+							    try { layer.setInfoTemplate(new InfoTemplate(this.PopupInfo)); }
+								catch(err) { console.error(this.Label + " PopupInfo error: " + err.description);}
 							}
 						}
 						break;
@@ -93,6 +100,10 @@
 						if (layer) {
 							layer.setMaxScale(this.MaxScale);
 							layer.setMinScale(this.MinScale);
+							if (infoTemplates) {
+							    try { layer.setInfoTemplates(infoTemplates); }
+							    catch (err) { console.error(this.Label + " PopupInfo error: " + err.description); }
+							}
 						}
 						break;
 				    case "wms":
@@ -117,12 +128,15 @@
 			},
 
 			makeInfoTemplates: function (PopupInfos) {
-			    var objString = "{[";
+			    var objString = '';
 			    arrayUtils.forEach(PopupInfos, function (info) {
-			        objString = '{"' + info.Layer.toString() + '": {' +
-                                '"infoTemplate": ' + JSON.stringify(new PopupTemplate(info.PopupInfo)) + '}},'
+			        try {
+			            objString = objString + '"' + info.Layer.toString() + '": {' +
+                                    '"infoTemplate": ' + JSON.stringify(new InfoTemplate(info.PopupInfo)) + '},'
+			        }
+			        catch (err) { console.error(this.Label + " PopupInfo error: " + err.description); }
 			    });
-			    objString = objString.substr(0, objString.length - 1) + ']}';
+			    objString = '{' + objString.substr(0, objString.length - 1) + '}';
 			    return JSON.parse(objString);
 			}
 		});

@@ -13,39 +13,50 @@
         ]
     },
     Basemaps: {
-        StreetBasemapLayers: [
-            { url: "http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer" },
-            { url: "http://tryitlive.arcgis.com/arcgis/rest/services/PublicSafety/MapServer" }
-        ],
-        ImageryBasemapLayers: [
-            { url: "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer" },
-			{ url: "http://tryitlive.arcgis.com/arcgis/rest/services/ReferenceOverlay/MapServer" }
-        ]
+        COPBasemap1: {
+            Label: "Streets",
+            Layers: [
+                { url: "http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer" },
+                { url: "http://tryitlive.arcgis.com/arcgis/rest/services/PublicSafety/MapServer" }
+            ]
+        },
+        COPBasemap2: {
+            Label: "Imagery",
+            Layers: [
+                { url: "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer" },
+                { url: "http://tryitlive.arcgis.com/arcgis/rest/services/ReferenceOverlay/MapServer" }
+            ]
+        }
     },
     OperationalLayers: [
         {
-            Label: "Emergency Operations",
+            Label: "Government Services",
             LayerType: "dynamic",
-            Url: "http://tryitlive.arcgis.com/arcgis/rest/services/EmergencyOperations/MapServer",
+            Url: "http://tryitlive.arcgis.com/arcgis/rest/services/GovernmentServices/MapServer",
             Visible: true,
-            VisibleLayers: [1,3,4,5],
-            RefreshInterval: 5,
+            VisibleLayers: [5,6,7,8],
+            RefreshInterval: 0,
             Opacity: 0.9,
             DisableClientCaching: true,
             MaxScale: 0,
             MinScale: 0,
             PopupInfos: [
                 {
-                    Layer: 1,
+                    Layer: 5,
                     PopupInfo: {
-                        title: "{TYPE}",
-                        description: "LOC: {LOC}<br />" +
-                                     "Source: {PLUMESRC}"
+                        title: "<strong>${NAME}</strong>",
+                        content: "${*}"
+                    }
+                }, {
+                    Layer: 8,
+                    PopupInfo: {
+                        title: "<strong>${NAME}</strong>",
+                        content: "${*}"
                     }
                 }
+
             ]
-        },
-        {
+        },{
             Label: "Shelters",
             LayerType: "feature",
             Url: "http://services.arcgis.com/b6gLrKHqgkQb393u/ArcGIS/rest/services/IncidentCommandTryItLive102/FeatureServer/5",
@@ -56,12 +67,11 @@
             MaxScale: 0,
             MinScale: 0,
 			PopupInfo: { 
-				title: "{FACNAME}",
-				description: "Organization: {ORGANIZ}<br />" +
-                         "Telephone: {POCPHONE}"
+				title: "<strong>${FACNAME}</strong>",
+				content: "Organization: ${ORGANIZ}<br />" +
+                         "Telephone: ${POCPHONE}"
 			}
-        },
-        {
+        },{
             Label: "Radar",
             LayerType: "wms",
             Url: "http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi?",
@@ -71,9 +81,8 @@
             Opacity: 0.45,
             MaxScale: 0,
             MinScale: 0
-        }
-    ]
-});
+        }]
+    });
 
 
 
@@ -90,9 +99,9 @@
     DisableClientCaching: true,                 // Disable browser caching of the layer, true or false
     MaxScale: 0,                                // Maximum zoomed in scale to display the layer
     MinScale: 0                                 // Minimum zoomed out scale to display the layer
-	PopupInfo: { PopupTemplate }                // For LayerType = "feature": PopupTemplate object. See: https://developers.arcgis.com/javascript/jshelp/intro_popuptemplate.html
-    PopupInfos: [{Layer: 1,                     // For LayerType = "dynamic" or "tiled": Array of layer indexes and PopupTemplate objects
-                  PopupInfo: { PopupTemplate }  //     to define popups for layers within the map service.
+	PopupInfo: { InfoTemplate }                 // For LayerType = "feature": InfoTemplate object. See: https://developers.arcgis.com/javascript/jshelp/intro_formatinfowindow.html
+    PopupInfos: [{Layer: 1,                     // For LayerType = "dynamic" or "tiled": Array of layer indexes and InfoTemplate objects
+                  PopupInfo: { InfoTemplate }  //     to define popups for layers within the map service.
                  }
                 ]
 }
