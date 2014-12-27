@@ -11,3 +11,57 @@
     height: 100%;
     width: 100%;
 }
+    
+.esriSimpleSlider {
+    background-color: rgba(102,102,102,0.80);
+    color: #ffffff;
+}
+
+#basemapToggle {
+      position: absolute;
+      top: 20px;
+      left: 62px;
+      z-index: 50;
+    }
+
+    .BasemapToggle .toggleButton {
+        background-color: rgba(102,102,102,0.80);
+    }
+
+    .BasemapToggle .basemapTitle {
+        height: 27px;
+        line-height: 27px;
+        width: 68px;
+        background-color: none;
+        color: #ffffff;
+    }
+
+    .basemapImage {
+        display: none;
+    }
+
+#homeBtn {
+    position: absolute;
+    top: 88px;
+    left: 19px;
+    z-index: 50;
+    background-color: rgba(102,102,102,0.80);
+    color: #ffffff;
+}
+
+#locateBtn {
+    position:absolute;
+    top: 127px;
+    left: 19px;
+    z-index: 50;
+    background-color: rgba(102,102,102,0.80);
+    color: #ffffff;
+}
+
+.esriSimpleSliderDecrementButton:hover,
+.esriSimpleSliderIncrementButton:hover,
+.BasemapToggle .toggleButton:hover,
+#homeBtn:hover,
+#locateBtn:hover {
+    background-color:rgba(102,102,102,0.90);
+}

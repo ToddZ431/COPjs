@@ -10,6 +10,9 @@ require([
     "dojox/mobile/deviceTheme",
     "esri/map",
     "esri/config",
+    "esri/dijit/BasemapToggle",
+    "esri/dijit/HomeButton",
+    "esri/dijit/LocateButton",
     "esri/dijit/Popup",
     "esri/dijit/PopupMobile",
     "esri/tasks/GeometryService",
@@ -26,6 +29,9 @@ function (
     dTheme,
     Map,
     esriConfig,
+    BasemapToggle,
+    HomeButton,
+    LocateButton,
     Popup,
     PopupMobile,
     GeometryService,
@@ -91,6 +97,7 @@ function (
         popup = new Popup({ anchor: "auto", titleInBody: false, visibleWhenEmpty: false }, domConstruct.create("div", { class: "dark" }));
     }
 
+    // initialize the map
     map = new Map("mapDiv", {
         center: [centerLng, centerLat ],
         zoom: level,
@@ -99,6 +106,41 @@ function (
     });
 
     map.on("load", initLayers);
+
+    // home button
+    var homeButton = new HomeButton({
+        map: map,
+        extent: null,
+        visible: true
+    }, "homeBtn");
+    homeButton.startup();
+
+    // locate button
+    var locateButton = new LocateButton({
+        map: map,
+        highlightLocation: true,
+        useTracking: true,
+        visible: true
+    }, "locateBtn");
+    locateButton.startup();
+
+    // basemap toggle
+    var bmToggle = new BasemapToggle({
+        map: map,
+        basemap: "copBasemap2",
+        visible: true,
+        basemaps: {
+            "copBasemap1": {
+                "label": mapConfig.Basemaps.COPBasemap1.Label,
+                "url": rootPath + "/Images/clear1x1.png"
+            },
+            "copBasemap2": {
+                "label": mapConfig.Basemaps.COPBasemap2.Label,
+                "url": rootPath + "/Images/clear1x1.png"
+            }
+        }
+    }, "basemapToggle");
+    bmToggle.startup();
 
     function initLayers() {
 		arrayUtils.forEach(mapConfig.OperationalLayers, function (layerInfo) {
