@@ -5,9 +5,6 @@ require([
 	"COP/LayerFactory",
     "dojo/_base/array",
     "dojo/dom-construct",
-    "dojox/mobile",
-    "dojox/mobile/parser",
-    "dojox/mobile/deviceTheme",
     "esri/map",
     "esri/config",
     "esri/dijit/BasemapToggle",
@@ -24,9 +21,6 @@ function (
 	layerFactory,
     arrayUtils,
     domConstruct,
-    mobile,
-    parser,
-    dTheme,
     Map,
     esriConfig,
     BasemapToggle,
@@ -38,8 +32,6 @@ function (
     urlUtils) {
 
     urlObject = urlUtils.urlToObject(window.location.href);
-    parser.parse();
-    mobile.hideAddressBar();
 
     //esri configuration
     esriConfig.defaults.io.alwaysUseProxy = mapConfig.Proxy.AlwaysUseProxy;
