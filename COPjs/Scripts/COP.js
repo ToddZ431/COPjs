@@ -1,10 +1,16 @@
-﻿var map, urlObject, windowWidth, popup;
+﻿var map, urlObject, smallScreen, popup;
 
 require([
     "Config/DefaultConfig",
 	"COP/LayerFactory",
     "dojo/_base/array",
+    "dojo/dom-class",
     "dojo/dom-construct",
+    "dijit/layout/BorderContainer",
+    "dijit/layout/ContentPane",
+    "dijit/layout/TabContainer",
+    "dijit/form/Button",
+    "dijit/registry",
     "esri/map",
     "esri/config",
     "esri/dijit/BasemapToggle",
@@ -20,7 +26,13 @@ function (
     mapConfig,
 	layerFactory,
     arrayUtils,
+    domClass,
     domConstruct,
+    BorderContainer,
+    ContentPane,
+    TabContainer,
+    Button,
+    registry,
     Map,
     esriConfig,
     BasemapToggle,
@@ -81,8 +93,9 @@ function (
     console.log("Initial Center: " + centerLat + ", " + centerLng + " Level: " + level);
 
     // if window is small, use mobile popup
-    windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    if (windowWidth < 600) {
+    var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    if (windowWidth < 600) { smallScreen = true; } else { smallScreen = false; }
+    if (smallScreen) {
         popup = new PopupMobile(null, domConstruct.create("div"));
     }
     else {
@@ -96,43 +109,12 @@ function (
         basemap: "copBasemap1",
         infoWindow: popup
     });
+    
+    map.on("load", function () {
+        initLayers();
+        initUI();
+    });
 
-    map.on("load", initLayers);
-
-    // home button
-    var homeButton = new HomeButton({
-        map: map,
-        extent: null,
-        visible: true
-    }, "homeBtn");
-    homeButton.startup();
-
-    // locate button
-    var locateButton = new LocateButton({
-        map: map,
-        highlightLocation: true,
-        useTracking: true,
-        visible: true
-    }, "locateBtn");
-    locateButton.startup();
-
-    // basemap toggle
-    var bmToggle = new BasemapToggle({
-        map: map,
-        basemap: "copBasemap2",
-        visible: true,
-        basemaps: {
-            "copBasemap1": {
-                "label": mapConfig.Basemaps.COPBasemap1.Label,
-                "url": rootPath + "/Images/clear1x1.png"
-            },
-            "copBasemap2": {
-                "label": mapConfig.Basemaps.COPBasemap2.Label,
-                "url": rootPath + "/Images/clear1x1.png"
-            }
-        }
-    }, "basemapToggle");
-    bmToggle.startup();
 
     function initLayers() {
 		arrayUtils.forEach(mapConfig.OperationalLayers, function (layerInfo) {
@@ -141,5 +123,61 @@ function (
 			if (layer)
 				map.addLayer(layer);
 		});
+    }
+
+    function initUI() {
+        // home button
+        var homeButton = new HomeButton({
+            map: map,
+            extent: null,
+            visible: true
+        }, "homeBtn");
+        homeButton.startup();
+
+        // locate button
+        var locateButton = new LocateButton({
+            map: map,
+            highlightLocation: true,
+            useTracking: true,
+            visible: true
+        }, "locateBtn");
+        locateButton.startup();
+
+        // basemap toggle
+        var bmToggle = new BasemapToggle({
+            map: map,
+            basemap: "copBasemap2",
+            visible: true,
+            basemaps: {
+                "copBasemap1": {
+                    "label": mapConfig.Basemaps.COPBasemap1.Label,
+                    "url": rootPath + "/Images/clear1x1.png"
+                },
+                "copBasemap2": {
+                    "label": mapConfig.Basemaps.COPBasemap2.Label,
+                    "url": rootPath + "/Images/clear1x1.png"
+                }
+            }
+        }, "basemapToggle");
+        bmToggle.startup();
+
+        // menu button
+        var myButton = new Button({
+            label: "Menu",
+            showLabel: false,
+            iconClass: "menuIcon",
+            onClick: function () {
+                domClass.toggle(registry.byId("sidePane").domNode, "collapsed");
+                registry.byId("mainContainer").layout();
+                map.resize();
+            }
+        }, "menuBtn").startup();
+
+        // collapse side pane on small screen
+        if (smallScreen) {
+            domClass.toggle(registry.byId("sidePane").domNode, "collapsed");
+            registry.byId("mainContainer").layout();
+            map.resize();
+        }
     }
 });

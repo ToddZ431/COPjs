@@ -8,6 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
+    <link rel="stylesheet" href="http://js.arcgis.com/3.12/dijit/themes/nihilo/nihilo.css">
     <link rel="stylesheet" href="http://js.arcgis.com/3.11/esri/css/esri.css" />
     <link rel="stylesheet" href="Styles/Default.css" />
 
@@ -28,11 +29,34 @@
     <script src="http://js.arcgis.com/3.11compact/"></script>
     <script src="Scripts/COP.js"></script>
 </head>
-<body style="background-color: #202020">
-    <div id="mapDiv">
-        <div id="basemapToggle"></div>
-        <div id="homeBtn"></div>
-        <div id="locateBtn"></div>
+<body class="nihilo" style="background-color: #202020">
+    <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'sidebar', gutters:false" id="mainContainer">
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'" id="topPane">
+            <div id="title">Top Pane</div>
+            <div id="topMenu">
+                <button id="menuBtn" type="button"></button>
+            </div>
+        </div>
+
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'" id="mapDiv">
+            <div id="basemapToggle"></div>
+            <div id="homeBtn"></div>
+            <div id="locateBtn"></div>
+        </div>
+
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'right'" id="sidePane">
+            <div data-dojo-type="dijit/layout/TabContainer" id="sideTabs">
+                <div data-dojo-type="dijit/layout/ContentPane" title="Layers" id="layersTab">
+                    Lorem ipsum and all around...
+                </div>
+                <div data-dojo-type="dijit/layout/ContentPane" title="Feeds" id="feedsTab">
+                    Lorem ipsum and all around - second...
+                </div>
+                <div data-dojo-type="dijit/layout/ContentPane" title="Tools" id="toolsTab">
+                    Lorem ipsum and all around - last...
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

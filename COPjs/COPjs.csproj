@@ -60,6 +60,7 @@
     <Content Include="Config\DefaultConfig.js" />
     <Content Include="Default.htm" />
     <Content Include="Images\clear1x1.png" />
+    <Content Include="Images\menu.png" />
     <Content Include="Proxy\proxy.ashx" />
     <Content Include="Proxy\proxy.config" />
     <None Include="Proxy\proxy.xsd">
