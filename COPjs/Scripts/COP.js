@@ -6,6 +6,7 @@ require([
     "dojo/_base/array",
     "dojo/dom-class",
     "dojo/dom-construct",
+    "dojo/parser",
     "dijit/layout/BorderContainer",
     "dijit/layout/ContentPane",
     "dijit/layout/TabContainer",
@@ -28,6 +29,7 @@ function (
     arrayUtils,
     domClass,
     domConstruct,
+    parser,
     BorderContainer,
     ContentPane,
     TabContainer,
@@ -43,6 +45,7 @@ function (
     GeometryService,
     urlUtils) {
 
+    parser.parse();
     urlObject = urlUtils.urlToObject(window.location.href);
 
     //esri configuration
@@ -66,13 +69,13 @@ function (
     };
 
     //get initial extent from url parameters
-    var centerLat, centerLng, level;
+    var centerY, centerX, level;
     if (urlObject.query) {
         if (urlObject.query.center) {
             try {
                 var coords = urlObject.query.center.split(",");
-                centerLng = parseFloat(coords[0]);
-                centerLat = parseFloat(coords[1]);
+                centerX = parseFloat(coords[0]);
+                centerY = parseFloat(coords[1]);
             }
             catch (err) { console.log("URL center parameter parse error: " + err.description); }
         }
@@ -84,13 +87,13 @@ function (
         }
     }
     //if not in url paramenters, use config values
-    if (isNaN(centerLat) || isNaN(centerLng)) {
-        centerLat = mapConfig.InitialExtent.CenterLatitude;
-        centerLng = mapConfig.InitialExtent.CenterLongitude;
+    if (isNaN(centerY) || isNaN(centerX)) {
+        centerY = mapConfig.InitialExtent.CenterY;
+        centerX = mapConfig.InitialExtent.CenterX;
     }
     if (isNaN(level))
-        level = mapConfig.InitialExtent.Level;
-    console.log("Initial Center: " + centerLat + ", " + centerLng + " Level: " + level);
+        level = mapConfig.InitialExtent.ZoomLevel;
+    console.log("Initial Center: " + centerX + ", " + centerY + " Level: " + level);
 
     // if window is small, use mobile popup
     var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -104,10 +107,13 @@ function (
 
     // initialize the map
     map = new Map("mapDiv", {
-        center: [centerLng, centerLat ],
+        center: [centerX, centerY ],
         zoom: level,
+        minZoom: mapConfig.MinZoomLevel,
+        maxZoom: mapConfig.MaxZoomLevel,
         basemap: "copBasemap1",
-        infoWindow: popup
+        infoWindow: popup,
+        sliderPosition: "top-right"
     });
     
     map.on("load", function () {

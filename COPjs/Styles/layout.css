@@ -1,0 +1,73 @@
+﻿html, body, #mainContainer {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#topPane {
+    height: 30px;
+}
+    #title {
+        float: left;
+    }
+
+    #topMenu {
+        float:right;
+    }
+
+    .menuIcon {
+        background-image: url("../Images/menu.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 19px;
+        width: 19px;
+    }
+
+#sidePane {
+    width: 280px;
+    padding: 0px;
+}
+    
+#sidePane.collapsed {
+    width: 0px;
+    padding: 0px;
+    visibility:hidden;
+}
+
+    #sideTabs {
+        width: 100%;
+        height: 100%;
+    }
+
+#mapDiv {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#basemapToggle {
+      position: absolute;
+      top: 20px;
+      right: 62px;
+      z-index: 50;
+    }
+
+    .basemapImage {
+        display: none;
+    }
+
+#homeBtn {
+    position: absolute;
+    top: 88px;
+    right: 19px;
+    z-index: 50;
+}
+
+#locateBtn {
+    position:absolute;
+    top: 127px;
+    right: 19px;
+    z-index: 50;
+}

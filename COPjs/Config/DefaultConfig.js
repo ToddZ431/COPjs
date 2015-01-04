@@ -1,9 +1,11 @@
 ﻿define({
     GeometryServiceUrl: "http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer",
+    MinZoomLevel: undefined,
+    MaxZoomLevel: undefined,
     InitialExtent: {
-        CenterLongitude: -88.141930,
-        CenterLatitude: 41.774971,
-        Level: 13
+        CenterX: -88.141930,
+        CenterY: 41.774971,
+        ZoomLevel: 13
     },
     Proxy: {
         AlwaysUseProxy: false,

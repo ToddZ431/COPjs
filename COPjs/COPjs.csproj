@@ -79,7 +79,8 @@
     <Content Include="Scripts\COPModules\LayerFactory.js" />
     <Content Include="Scripts\COP.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Styles\Default.css" />
+    <Content Include="Styles\layout.css" />
+    <Content Include="Styles\nihilo-cop.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

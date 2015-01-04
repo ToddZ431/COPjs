@@ -1,0 +1,36 @@
+﻿body {
+}
+
+/* buttons */
+.nihilo .esriSimpleSlider,
+.nihilo .BasemapToggle .toggleButton,
+.nihilo .dijitButtonNode,
+.nihilo #homeBtn,
+.nihilo #locateBtn {
+    background-color: rgba(102,102,102,0.80);
+    background-image: none;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    color: #F4F4F4;
+}
+
+/* button hover */
+.nihilo .esriSimpleSliderDecrementButton:hover,
+.nihilo .esriSimpleSliderIncrementButton:hover,
+.nihilo .BasemapToggle .toggleButton:hover,
+.nihilo .dijitButtonNode:hover,
+.nihilo #homeBtn:hover,
+.nihilo #locateBtn:hover {
+    background-color: rgba(102,102,102,0.90);
+    background-image: none;
+    color: #F4F4F4;
+}
+
+.nihilo .BasemapToggle .basemapTitle {
+    font-size: 14px;
+    height: 27px;
+    line-height: 27px;
+    min-width: 68px;
+    background-color: none;
+    color: #ffffff;
+}

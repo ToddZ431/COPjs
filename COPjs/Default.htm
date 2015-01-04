@@ -10,7 +10,8 @@
 
     <link rel="stylesheet" href="http://js.arcgis.com/3.12/dijit/themes/nihilo/nihilo.css">
     <link rel="stylesheet" href="http://js.arcgis.com/3.11/esri/css/esri.css" />
-    <link rel="stylesheet" href="Styles/Default.css" />
+    <link rel="stylesheet" href="Styles/layout.css" />
+    <link rel="stylesheet" href="Styles/nihilo-cop.css" />
 
     <script>
         var rootPath = location.pathname.replace(/\/[^/]*$/, "");
@@ -23,7 +24,7 @@
                 location: rootPath + '/Scripts/COPModules'
             }],
             async: true,
-            parseOnLoad: true
+            parseOnLoad: false
         };
     </script>
     <script src="http://js.arcgis.com/3.11compact/"></script>
@@ -47,13 +48,14 @@
         <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'right'" id="sidePane">
             <div data-dojo-type="dijit/layout/TabContainer" id="sideTabs">
                 <div data-dojo-type="dijit/layout/ContentPane" title="Layers" id="layersTab">
-                    Lorem ipsum and all around...
+                    <div id="quickToggleDiv"></div>
+                    <div id="tocDiv">Table of Contents goes here.</div>
                 </div>
                 <div data-dojo-type="dijit/layout/ContentPane" title="Feeds" id="feedsTab">
-                    Lorem ipsum and all around - second...
+                    <div>Feature lists for live feeds go here.</div>
                 </div>
                 <div data-dojo-type="dijit/layout/ContentPane" title="Tools" id="toolsTab">
-                    Lorem ipsum and all around - last...
+                    <div>Tool buttons and tool results go here.</div>
                 </div>
             </div>
         </div>
