@@ -1,8 +1,9 @@
-﻿var map, urlObject, smallScreen, popup;
+﻿var map, urlObject, smallScreen, popup, toc;
 
 require([
     "Config/DefaultConfig",
 	"COP/LayerFactory",
+    "agsjs/dijit/TOC",
     "dojo/_base/array",
     "dojo/dom-class",
     "dojo/dom-construct",
@@ -11,6 +12,8 @@ require([
     "dijit/layout/ContentPane",
     "dijit/layout/TabContainer",
     "dijit/form/Button",
+    "dijit/form/CheckBox",
+    "dijit/form/Form",
     "dijit/registry",
     "esri/map",
     "esri/config",
@@ -26,6 +29,7 @@ require([
 function (
     mapConfig,
 	layerFactory,
+    TOC,
     arrayUtils,
     domClass,
     domConstruct,
@@ -34,6 +38,8 @@ function (
     ContentPane,
     TabContainer,
     Button,
+    CheckBox,
+    Form,
     registry,
     Map,
     esriConfig,
@@ -123,12 +129,30 @@ function (
 
 
     function initLayers() {
+        var tocInfos = [];
+        // load operational layers
 		arrayUtils.forEach(mapConfig.OperationalLayers, function (layerInfo) {
 		    var factory = new layerFactory(layerInfo);
 			var layer = factory.createLayer();
 			if (layer)
-				map.addLayer(layer);
+			    map.addLayer(layer);
+			if (!layerInfo.ExcludeFromTOC) {
+			    var tocInfo = {
+			        layer: layer,
+			        title: layerInfo.Label,
+			        collapsed: !layerInfo.ExpandInTOC || false,
+			        slider: false
+			    }
+			    tocInfos.push(tocInfo);
+			}
 		});
+
+        // initialize TOC
+		toc = new TOC({
+		    map: map,
+		    layerInfos: tocInfos
+		}, 'tocDiv');
+		toc.startup();
     }
 
     function initUI() {

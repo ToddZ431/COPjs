@@ -23,11 +23,14 @@
                 name: "COP",
                 location: rootPath + '/Scripts/COPModules'
             }],
+            paths: {
+                agsjs: rootPath + '/Scripts/agsjs' 
+            },
             async: true,
             parseOnLoad: false
         };
     </script>
-    <script src="http://js.arcgis.com/3.11compact/"></script>
+    <script src="http://js.arcgis.com/3.10/"></script>
     <script src="Scripts/COP.js"></script>
 </head>
 <body class="nihilo" style="background-color: #202020">
@@ -49,7 +52,7 @@
             <div data-dojo-type="dijit/layout/TabContainer" id="sideTabs">
                 <div data-dojo-type="dijit/layout/ContentPane" title="Layers" id="layersTab">
                     <div id="quickToggleDiv"></div>
-                    <div id="tocDiv">Table of Contents goes here.</div>
+                    <div id="tocDiv"></div>
                 </div>
                 <div data-dojo-type="dijit/layout/ContentPane" title="Feeds" id="feedsTab">
                     <div>Feature lists for live feeds go here.</div>

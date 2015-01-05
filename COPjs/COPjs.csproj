@@ -62,7 +62,9 @@
     <Content Include="Images\clear1x1.png" />
     <Content Include="Images\menu.png" />
     <Content Include="Proxy\proxy.ashx" />
-    <Content Include="Proxy\proxy.config" />
+    <Content Include="Proxy\proxy.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Proxy\proxy.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -76,6 +78,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\agsjs\css\agsjs.css" />
+    <Content Include="Scripts\agsjs\dijit\css\TOC.css" />
+    <Content Include="Scripts\agsjs\dijit\templates\tocNode.html" />
+    <Content Include="Scripts\agsjs\dijit\TOC.js" />
     <Content Include="Scripts\COPModules\LayerFactory.js" />
     <Content Include="Scripts\COP.js" />
     <None Include="Scripts\_references.js" />
