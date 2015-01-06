@@ -1,5 +1,6 @@
 ﻿define({
     GeometryServiceUrl: "http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer",
+    CollapseSidePane: false,
     MinZoomLevel: undefined,
     MaxZoomLevel: undefined,
     InitialExtent: {

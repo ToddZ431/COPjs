@@ -200,7 +200,7 @@ function (
         }, "menuBtn").startup();
 
         // collapse side pane on small screen
-        if (smallScreen) {
+        if (smallScreen || mapConfig.CollapseSidePane) {
             domClass.toggle(registry.byId("sidePane").domNode, "collapsed");
             registry.byId("mainContainer").layout();
             map.resize();
