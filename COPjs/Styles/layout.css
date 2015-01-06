@@ -14,14 +14,15 @@
 
     #topMenu {
         float:right;
+        padding: 2px 6px 2px 2px;
     }
 
     .menuIcon {
         background-image: url("../Images/menu.png");
         background-position: center;
         background-repeat: no-repeat;
-        height: 19px;
-        width: 19px;
+        height: 20px;
+        width: 20px;
     }
 
 #sidePane {
@@ -48,14 +49,14 @@
 }
 
 #basemapToggle {
-      position: absolute;
-      top: 20px;
-      right: 62px;
-      z-index: 50;
-    }
+    position: absolute;
+    top: 20px;
+    right: 62px;
+    z-index: 50;
+}
 
-    .basemapImage {
-        display: none;
+    .BasemapToggle .basemapImage {
+        height: 30px;
     }
 
 #homeBtn {

@@ -1,9 +1,13 @@
 ﻿body {
+    font-family: Verdana,Helvetica,sans-serif;
+    font-size: 12px;
+    line-height: 16px;
 }
 
 /* buttons */
 .nihilo .esriSimpleSlider,
 .nihilo .BasemapToggle .toggleButton,
+.nihilo .dijitButton,
 .nihilo .dijitButtonNode,
 .nihilo #homeBtn,
 .nihilo #locateBtn {
@@ -12,6 +16,7 @@
     border-radius: 0px;
     -webkit-border-radius: 0px;
     color: #F4F4F4;
+    margin: 0px;
 }
 
 /* button hover */
@@ -24,6 +29,7 @@
     background-color: rgba(102,102,102,0.90);
     background-image: none;
     color: #F4F4F4;
+    margin: 0px;
 }
 
 .nihilo .BasemapToggle .basemapTitle {
@@ -31,6 +37,7 @@
     height: 27px;
     line-height: 27px;
     min-width: 68px;
-    background-color: none;
+    background-color: rgba(0,0,0,0.0);
+    background-image: none;
     color: #ffffff;
 }

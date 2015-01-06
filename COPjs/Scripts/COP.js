@@ -14,6 +14,7 @@ require([
     "dijit/form/Button",
     "dijit/registry",
     "esri/map",
+    "esri/basemaps",
     "esri/config",
     "esri/dijit/BasemapToggle",
     "esri/dijit/HomeButton",
@@ -38,6 +39,7 @@ function (
     Button,
     registry,
     Map,
+    esriBasemaps,
     esriConfig,
     BasemapToggle,
     HomeButton,
@@ -61,13 +63,15 @@ function (
     });
 
     //basemaps
-    esriConfig.defaults.map.basemaps.copBasemap1 = {
+    esriBasemaps.copBasemap1 = {
         baseMapLayers: mapConfig.Basemaps.COPBasemap1.Layers,
-        title: mapConfig.Basemaps.COPBasemap1.Label
+        title: mapConfig.Basemaps.COPBasemap1.Label,
+        thumbnailUrl: rootPath + "/Images/clear1x1.png"
     };
-    esriConfig.defaults.map.basemaps.copBasemap2 = {
+    esriBasemaps.copBasemap2 = {
         baseMapLayers: mapConfig.Basemaps.COPBasemap2.Layers,
-        title: mapConfig.Basemaps.COPBasemap2.Label
+        title: mapConfig.Basemaps.COPBasemap2.Label,
+        thumbnailUrl: rootPath + "/Images/clear1x1.png"
     };
 
     //get initial extent from url parameters
@@ -173,17 +177,7 @@ function (
         var bmToggle = new BasemapToggle({
             map: map,
             basemap: "copBasemap2",
-            visible: true,
-            basemaps: {
-                "copBasemap1": {
-                    "label": mapConfig.Basemaps.COPBasemap1.Label,
-                    "url": rootPath + "/Images/clear1x1.png"
-                },
-                "copBasemap2": {
-                    "label": mapConfig.Basemaps.COPBasemap2.Label,
-                    "url": rootPath + "/Images/clear1x1.png"
-                }
-            }
+            visible: true
         }, "basemapToggle");
         bmToggle.startup();
 
