@@ -46,7 +46,8 @@ define("agsjs/dijit/TOC",
  "esri/config",
  "esri/layers/ArcGISDynamicMapServiceLayer",
  "esri/layers/ArcGISTiledMapServiceLayer",
- "dojo/_base/sniff"], function(
+ "dijit/registry",
+ "dojo/_base/sniff"], function (
   declare, 
   has,
   aspect,
@@ -66,7 +67,8 @@ define("agsjs/dijit/TOC",
   scaleUtils,
   esriConfig,
   ArcGISDynamicMapServiceLayer,
-  ArcGISTiledMapServiceLayer){
+  ArcGISTiledMapServiceLayer,
+  registry){
 
   /**
    * _TOCNode is a node, with 3 possible types: root layer|serviceLayer|legend
@@ -375,7 +377,7 @@ define("agsjs/dijit/TOC",
 		  if (this.rootLayer.credential && this.rootLayer.credential.token ){
 		  	src = src + "?token=" + this.rootLayer.credential.token;
 		  } else if (esriConfig.defaults.io.alwaysUseProxy){
-		  	src = esriConfig.defaults.io.proxyUrl+ "?"+src;
+		      src = esriConfig.defaults.io.proxyUrl + "?" + src;
 		  }
         }
       }
@@ -504,7 +506,7 @@ define("agsjs/dijit/TOC",
     _onClick: function(evt){
       var t = evt.target;
 	  var lay; 
-      if (t == this.checkNode || dijit.getEnclosingWidget(t) == this.checkNode) {
+	  if (t == this.checkNode || registry.getEnclosingWidget(t) == this.checkNode) {
         // 2013-07-23: remove this most complex checkable legend functionality to simplify the widget
         if (this.serviceLayer) {
           this.serviceLayer.visible = this.checkNode && this.checkNode.checked;
@@ -632,7 +634,7 @@ define("agsjs/dijit/TOC",
       if (this.rootLayer.version >= 10.01) {
         url = this.rootLayer.url + '/legend';
       } else {
-        url = 'http://www.arcgis.com/sharing/tools/legend';
+          url = 'http://utility.arcgis.com/sharing/tools/legend';
         var i = this.rootLayer.url.toLowerCase().indexOf('/rest/');
         var soap = this.rootLayer.url.substring(0, i) + this.rootLayer.url.substring(i + 5);
         url = url + '?soapUrl=' + escape(soap);

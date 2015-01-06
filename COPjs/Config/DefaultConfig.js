@@ -8,7 +8,7 @@
         ZoomLevel: 13
     },
     Proxy: {
-        AlwaysUseProxy: true,
+        AlwaysUseProxy: false,
         DefaultProxyUrl: "Proxy/Proxy.ashx",
         ProxyRules: [
             {urlPrefix: "traffic.arcgis.com", proxyUrl: "Proxy/Proxy.ashx"}
@@ -87,7 +87,8 @@
             Opacity: 0.45,
             MaxScale: 0,
             MinScale: 0,
-            ExcludeFromTOC: true
+            ExpandInTOC: false,
+            ExcludeFromTOC: false
         }]
     });
 
