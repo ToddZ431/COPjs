@@ -59,8 +59,12 @@
   <ItemGroup>
     <Content Include="Config\DefaultConfig.js" />
     <Content Include="Default.htm" />
+    <Content Include="Images\checked.png" />
     <Content Include="Images\clear1x1.png" />
     <Content Include="Images\menu.png" />
+    <Content Include="Images\minus.png" />
+    <Content Include="Images\plus.png" />
+    <Content Include="Images\unchecked.png" />
     <Content Include="Proxy\proxy.ashx" />
     <Content Include="Proxy\proxy.config">
       <SubType>Designer</SubType>

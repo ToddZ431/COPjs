@@ -1,4 +1,5 @@
 ﻿define({
+    AppTitle: "Common Operating Picture Viewer",
     GeometryServiceUrl: "http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer",
     CollapseSidePane: false,
     MinZoomLevel: undefined,

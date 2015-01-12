@@ -5,6 +5,7 @@ require([
 	"COP/LayerFactory",
     "agsjs/dijit/TOC",
     "dojo/_base/array",
+    "dojo/dom",
     "dojo/dom-class",
     "dojo/dom-construct",
     "dojo/parser",
@@ -12,6 +13,7 @@ require([
     "dijit/layout/ContentPane",
     "dijit/layout/TabContainer",
     "dijit/form/Button",
+    "dijit/form/CheckBox",
     "dijit/registry",
     "esri/map",
     "esri/basemaps",
@@ -30,6 +32,7 @@ function (
 	layerFactory,
     TOC,
     arrayUtils,
+    dom,
     domClass,
     domConstruct,
     parser,
@@ -37,6 +40,7 @@ function (
     ContentPane,
     TabContainer,
     Button,
+    CheckBox,
     registry,
     Map,
     esriBasemaps,
@@ -51,6 +55,7 @@ function (
 
     parser.parse();
     urlObject = urlUtils.urlToObject(window.location.href);
+    dom.byId("appTitle").innerHTML = mapConfig.AppTitle;
 
     //esri configuration
     esriConfig.defaults.io.alwaysUseProxy = mapConfig.Proxy.AlwaysUseProxy;
@@ -150,6 +155,7 @@ function (
         // initialize TOC
 		toc = new TOC({
 		    map: map,
+		    style: "inline",
 		    layerInfos: tocInfos
 		}, 'tocDiv');
 		toc.startup();

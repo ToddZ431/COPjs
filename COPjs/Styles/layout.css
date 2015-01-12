@@ -6,23 +6,24 @@
 }
 
 #topPane {
-    height: 30px;
+    height: 38px;
 }
-    #title {
+    #appTitle {
         float: left;
+        padding: 0px 0px 0px 6px;
     }
 
     #topMenu {
         float:right;
-        padding: 2px 6px 2px 2px;
+        padding: 0px 6px 0px 0px;
     }
 
     .menuIcon {
         background-image: url("../Images/menu.png");
         background-position: center;
         background-repeat: no-repeat;
-        height: 20px;
-        width: 20px;
+        width: 28px;
+        height: 28px;
     }
 
 #sidePane {
@@ -41,6 +42,20 @@
         height: 100%;
     }
 
+    #sideTabs .dijitTabListContainer-top,
+    #sideTabs .dijitTabListWrapper,
+    #sideTabs .dijitTabContainerTop-tabs  {
+        height: 36px !important;
+    }
+
+    #sideTabs .dijitTabContent {
+        width: 90px;
+    }
+
+    #sideTabs .dijitTab {
+        height: 100%;
+    }
+
 #mapDiv {
     padding: 0;
     margin: 0;
@@ -51,24 +66,20 @@
 #basemapToggle {
     position: absolute;
     top: 20px;
-    right: 62px;
+    right: 60px;
     z-index: 50;
 }
 
-    .BasemapToggle .basemapImage {
-        height: 30px;
-    }
-
 #homeBtn {
     position: absolute;
-    top: 88px;
-    right: 19px;
+    top: 93px;
+    right: 20px;
     z-index: 50;
 }
 
 #locateBtn {
     position:absolute;
-    top: 127px;
-    right: 19px;
+    top: 133px;
+    right: 20px;
     z-index: 50;
 }
