@@ -3,7 +3,7 @@
 An HTML 5 Common Operating Picture viewer using the ArcGIS JavaScript API. This project
 is to replace COP viewers built with the ArcGIS Viewer for Flex.
 
-### [View Live Demo](http://copjs-demo.azurewebsites.com)
+### [View Live Demo](http://copjs-demo.azurewebsites.net)
 
 ## Completed Features
 
