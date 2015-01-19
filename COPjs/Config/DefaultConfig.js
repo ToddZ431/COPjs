@@ -73,7 +73,8 @@
             MaxScale: 0,
             MinScale: 0,
             ExpandInTOC: false,
-            ExcludeFromTOC: false,
+            ExcludeFromTOC: true,
+            QuickToggle: true,
 			PopupInfo: { 
 				title: "<strong>${FACNAME}</strong>",
 				content: "Organization: ${ORGANIZ}<br />" +
@@ -90,7 +91,8 @@
             MaxScale: 0,
             MinScale: 0,
             ExpandInTOC: false,
-            ExcludeFromTOC: false
+            ExcludeFromTOC: true,
+            QuickToggle: true
         }]
     });
 
@@ -111,6 +113,7 @@
     MinScale: 0,                                // Minimum zoomed out scale to display the layer
     ExpandInTOC: false,                         // Expand the sublayers in the Tabel of Contents on initialization
     ExcludeFromTOC: false,                      // Exclude the layer from appearing in the Table of Contents
+    QuickToggle: false,                         // If true, creates a toggle button above the TOC to turn the layer on and off.
 	PopupInfo: { InfoTemplate }                 // For LayerType = "feature": InfoTemplate object. See: https://developers.arcgis.com/javascript/jshelp/intro_formatinfowindow.html
     PopupInfos: [{Layer: 1,                     // For LayerType = "dynamic" or "tiled": Array of layer indexes and InfoTemplate objects
                   PopupInfo: { InfoTemplate }   //     to define popups for layers within the map service.

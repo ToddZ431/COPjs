@@ -6,9 +6,9 @@
 */
 
 body.nihilo {
-    font-family: Verdana,Helvetica,sans-serif;
-    font-size: 12px;
-    line-height: 16px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 18px;
     background-color: #161616;
     color: #F4F4F4;
 }
@@ -19,7 +19,7 @@ body.nihilo {
 }
 
 .nihilo #appTitle {
-    font-size: 15px;
+    font-size: 18px;
     font-weight: bold;
     line-height: 38px;
     vertical-align: middle;
@@ -91,7 +91,7 @@ body.nihilo {
         background: none repeat scroll 0 0 rgba(255, 255, 255, 0.0);
         border-radius: 0 0 0px 0px;
         color: #F4F4F4;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: bold;
         height: 100%;
         line-height: 28px;
@@ -101,15 +101,46 @@ body.nihilo {
         width: 100%;
     }
 
-/*  Button Hover  */
+.nihilo #quickToggleDiv .dijitToggleButton {
+    width: 97%;
+    margin: 4px 0px 4px 0px;
+}
+
+    .nihilo #quickToggleDiv .dijitButtonNode {
+        width: 100%;
+        height: 28px;
+        font-weight: bold;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .nihilo #quickToggleDiv .dijitButtonContents {
+    }
+
+    .nihilo #quickToggleDiv .dijitButtonText {
+    }
+
+    .nihilo #quickToggleDiv .toggleIcon {
+        background: url("../Images/unchecked.png") no-repeat;
+        width: 20px;
+        height: 20px;
+        margin: 4px 0px;
+    }
+
+    .nihilo #quickToggleDiv .dijitToggleButtonChecked .toggleIcon {
+        background: url("../Images/checked.png") no-repeat;
+    }
+
+/*  Button Hover & Active */
 .nihilo .dijitButtonHover .dijitButtonNode,
-.nihilo .dijitButtonNodeHover,
+.nihilo .dijitButtonActive .dijitButtonNode,
 .nihilo .dijitToggleButtonHover .dijitButtonNode,
+.nihilo .dijitToggleButtonActive .dijitButtonNode,
 .nihilo .dijitDropDownButtonHover .dijitButtonNode,
 .nihilo .dijitButtonContentsHover,
 .nihilo .dijitDownArrowButtonHover,
 .nihilo .dijitUpArrowButtonHover {
-    background: none repeat-x scroll left top #F4F4F4;
+    background: none repeat-x scroll left top #646464;
     color: inherit;
 }
 
@@ -129,7 +160,7 @@ body.nihilo {
     border-style: solid;
     border-width: 1px;
     color: #F4F4F4;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     line-height: 34px;
     vertical-align: middle;
@@ -194,7 +225,12 @@ body.nihilo {
 }
 
 .nihilo .agsjsTOCRootLayerLabel {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   margin-left: 4px;
+}
+
+/* popup */
+.nihilo .esriPopup{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }

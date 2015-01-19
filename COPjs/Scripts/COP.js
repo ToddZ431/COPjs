@@ -14,6 +14,7 @@ require([
     "dijit/layout/TabContainer",
     "dijit/form/Button",
     "dijit/form/CheckBox",
+    "dijit/form/ToggleButton",
     "dijit/registry",
     "esri/map",
     "esri/basemaps",
@@ -41,6 +42,7 @@ function (
     TabContainer,
     Button,
     CheckBox,
+    ToggleButton,
     registry,
     Map,
     esriBasemaps,
@@ -139,16 +141,28 @@ function (
 		arrayUtils.forEach(mapConfig.OperationalLayers, function (layerInfo) {
 		    var factory = new layerFactory(layerInfo);
 			var layer = factory.createLayer();
-			if (layer)
+			if (layer) {
 			    map.addLayer(layer);
-			if (!layerInfo.ExcludeFromTOC) {
-			    var tocInfo = {
-			        layer: layer,
-			        title: layerInfo.Label,
-			        collapsed: !layerInfo.ExpandInTOC || false,
-			        slider: false
+			    if (!layerInfo.ExcludeFromTOC) {
+			        var tocInfo = {
+			            layer: layer,
+			            title: layerInfo.Label,
+			            collapsed: !layerInfo.ExpandInTOC || false,
+			            slider: false
+			        }
+			        tocInfos.push(tocInfo);
 			    }
-			    tocInfos.push(tocInfo);
+			    if (layerInfo.QuickToggle) {
+			        var nodeId = "qt-" + layer.id;
+			        var node = domConstruct.create("div", { id: nodeId }, dom.byId("quickToggleDiv"), "first");
+			        new ToggleButton({
+			            showLabel: true,
+			            checked: layerInfo.Visible,
+			            onChange: function (val) { layer.setVisibility(val) },
+			            label: layerInfo.Label,
+                        iconClass: "toggleIcon"
+			        }, nodeId).startup();
+			    }
 			}
 		});
 
@@ -156,7 +170,7 @@ function (
 		toc = new TOC({
 		    map: map,
 		    style: "inline",
-		    layerInfos: tocInfos
+		    layerInfos: tocInfos.reverse()
 		}, 'tocDiv');
 		toc.startup();
     }
