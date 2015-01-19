@@ -30,21 +30,30 @@ Custom popups can be configured for each operational layer. The Mobile Popup wil
 screen devices and the normal popup will be used on larger screen devices. See DefaultConfig.js for sample popup
 configurations.
 
+### Layers Tab
+
+#### Quick Toggles
+
+Quick Toggle buttons appear above the Table of Contents and allow quick, easy access for turning major
+layers on and off (i.e. radar, traffic, incidents, etc). Quick Toggle is enabled for a layer by setting
+its QuickToggle property to 'true'.
+
+#### Table of Contents
+The Table of Contents (TOC) shows the list of operational layers in the map along with a legend
+for each layer. Checkboxes allow for turning map services and sublayers on and off.
+
 ### Proxy Support 
 
 Map service requests can be proxied through the server using the included ASP.Net proxy page. In the Proxy
 configuration section, the default proxy URL and the option to always use the proxy page can be set. An
 array of proxy rules can be configured to only proxy specific resources rather than all requests.
 
-### Table of Contents
-The Table of Contents (TOC) shows the list of operational layers in the map along with a legend
-for each layer. Checkboxes allow for turning map services and sublayers on and off.
-
 ## Planned Features
-* Quick Toggle - Larger buttons above the TOC for quickly turning on/off major services like weather radar and traffic feeds.
+
 * Live Feeds - A special type of operational layer that displays important features in feature services such as active 
 incidents, vehicle locations, etc. The list of features in each Live Feed will be shown in the Feeds tab with the ability to 
 click on a feature to find it on the map.
+
 * Tools - The Tools tab will contain various widgits for working with the map such as address/feature search, measure, coordinate
 conversion/locating tools, drawing, printing, etc.
 

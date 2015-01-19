@@ -34,6 +34,21 @@
     },
     OperationalLayers: [
         {
+            Label: "US National Grid",
+            LayerType: "dynamic",
+            Url: "http://maps1.arcgisonline.com/ArcGIS/rest/services/NGA_US_National_Grid/MapServer",
+            Visible: false,
+            VisibleLayers: [ ],
+            RefreshInterval: 0,
+            Opacity: 0.9,
+            DisableClientCaching: false,
+            MaxScale: 0,
+            MinScale: 0,
+            ExpandInTOC: false,
+            ExcludeFromTOC: false,
+            QuickToggle: false,
+            PopupInfos: [ ]
+        }, {
             Label: "Government Services",
             LayerType: "dynamic",
             Url: "http://tryitlive.arcgis.com/arcgis/rest/services/GovernmentServices/MapServer",
@@ -80,7 +95,27 @@
 				content: "Organization: ${ORGANIZ}<br />" +
                          "Telephone: ${POCPHONE}"
 			}
-        },{
+        }, {
+            Label: "Floods",
+            LayerType: "feature",
+            Url: "http://igems.doi.gov/arcgis/rest/services/igems_haz/MapServer/0",
+            Visible: true,
+            RefreshInterval: 5,
+            Opacity: 1.0,
+            DisableClientCaching: true,
+            MaxScale: 0,
+            MinScale: 0,
+            ExpandInTOC: false,
+            ExcludeFromTOC: false,
+            QuickToggle: false,
+            PopupInfo: {
+                title: "<strong>${Location}</strong>",
+                content: "Waterbody: ${Waterbody}<br />" +
+                         "Status: ${Status}<br />" +
+                         "Stage: ${Stage} ${Units}<br />" +
+                         "<a href='${URL}' target='_blank'>Hydrograph</a>"
+            }
+        }, {
             Label: "Radar",
             LayerType: "wms",
             Url: "http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi?",
