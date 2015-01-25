@@ -22,6 +22,7 @@ require([
     "esri/dijit/BasemapToggle",
     "esri/dijit/HomeButton",
     "esri/dijit/LocateButton",
+    "esri/dijit/Measurement",
     "esri/dijit/Popup",
     "esri/dijit/PopupMobile",
     "esri/tasks/GeometryService",
@@ -50,6 +51,7 @@ function (
     BasemapToggle,
     HomeButton,
     LocateButton,
+    Measurement,
     Popup,
     PopupMobile,
     GeometryService,
@@ -132,6 +134,7 @@ function (
     map.on("load", function () {
         initLayers();
         initUI();
+        initTools();
     });
 
 
@@ -148,7 +151,8 @@ function (
 			            layer: layer,
 			            title: layerInfo.Label,
 			            collapsed: !layerInfo.ExpandInTOC || false,
-			            slider: false
+			            slider: false,
+			            autoToggle: false
 			        }
 			        tocInfos.push(tocInfo);
 			    }
@@ -219,5 +223,17 @@ function (
             registry.byId("mainContainer").layout();
             map.resize();
         }
+    }
+
+    function initTools() {
+        // measure tool
+        var measure = new esri.dijit.Measurement({
+            map: map,
+            defaultAreaUnit: esri.Units.SQUARE_MILES,
+            defaultLengthUnit: esri.Units.FEET
+                          }, dom.byId("toolForm"));
+        measure.startup();
+        measure.setTool("distance",false);
+
     }
 });
