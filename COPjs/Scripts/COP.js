@@ -117,7 +117,7 @@ function (
         popup = new PopupMobile(null, domConstruct.create("div"));
     }
     else {
-        popup = new Popup({ anchor: "auto", titleInBody: true, visibleWhenEmpty: false }, domConstruct.create("div", { class: "dark" }));
+        popup = new Popup({ anchor: "auto", titleInBody: false, visibleWhenEmpty: false }, domConstruct.create("div", { class: "dark" }));
     }
 
     // initialize the map
@@ -234,6 +234,5 @@ function (
                           }, dom.byId("toolForm"));
         measure.startup();
         measure.setTool("distance",false);
-
     }
 });
