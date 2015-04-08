@@ -630,15 +630,8 @@ define("agsjs/dijit/TOC",
     
     _getLegendInfo: function(){
     
-      var url = '';
-      if (this.rootLayer.version >= 10.01) {
-        url = this.rootLayer.url + '/legend';
-      } else {
-          url = 'http://utility.arcgis.com/sharing/tools/legend';
-        var i = this.rootLayer.url.toLowerCase().indexOf('/rest/');
-        var soap = this.rootLayer.url.substring(0, i) + this.rootLayer.url.substring(i + 5);
-        url = url + '?soapUrl=' + escape(soap);
-      }
+      var url = this.rootLayer.url + '/legend';
+      
       var handle = esri.request({
         url: url,
         content: {

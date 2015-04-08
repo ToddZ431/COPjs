@@ -1,3 +1,29 @@
 ﻿body.nihilo {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+
+/* Popup */
+.dark.esriPopup a {
+    color: #fff;
+}
+
+/* Quick Toggle */
+.nihilo #quickToggleDiv .dijitButtonNode {
+    color: #fff;
+    background: #555454;
+    border: 1px solid #dedede;
+    padding: 2px 2px 2px 2px;
+    text-align:left;
+}
+
+.nihilo #quickToggleDiv .dijitToggleButtonChecked .toggleIcon {
+    background: #555454 url("../Images/checked.png") no-repeat left center;
+    width: 22px;
+    height: 20px;
+}
+
+.nihilo #quickToggleDiv .toggleIcon {
+    background: #555454 url("../Images/unchecked.png") no-repeat left center;
+    width: 22px;
+    height: 20px;
+}
