@@ -74,7 +74,7 @@
     position: absolute;
     top: 20px;
     right: 60px;
-    z-index: 50;
+    z-index: 30;
 }
 
     #basemapToggle .basemapImage {
@@ -104,12 +104,12 @@
     position: absolute;
     top: 93px;
     right: 20px;
-    z-index: 50;
+    z-index: 30;
 }
 
 #locateBtn {
     position:absolute;
     top: 133px;
     right: 20px;
-    z-index: 50;
+    z-index: 30;
 }
