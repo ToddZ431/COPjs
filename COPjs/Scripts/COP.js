@@ -9,6 +9,7 @@ require([
     "dojo/dom-class",
     "dojo/dom-construct",
     "dojo/parser",
+    "dijit/layout/AccordionContainer",
     "dijit/layout/BorderContainer",
     "dijit/layout/ContentPane",
     "dijit/layout/TabContainer",
@@ -20,6 +21,7 @@ require([
     "esri/basemaps",
     "esri/config",
     "esri/dijit/BasemapToggle",
+    "esri/dijit/Geocoder",
     "esri/dijit/HomeButton",
     "esri/dijit/LocateButton",
     "esri/dijit/Measurement",
@@ -38,6 +40,7 @@ function (
     domClass,
     domConstruct,
     parser,
+    AccordionContainer,
     BorderContainer,
     ContentPane,
     TabContainer,
@@ -49,6 +52,7 @@ function (
     esriBasemaps,
     esriConfig,
     BasemapToggle,
+    Geocoder,
     HomeButton,
     LocateButton,
     Measurement,
@@ -226,12 +230,38 @@ function (
     }
 
     function initTools() {
+        // accordion contain for tools
+        var accordion = new AccordionContainer({ id: "toolsAccordion" }, "toolsContainer");
+        accordion.addChild(new ContentPane({
+            title: "Search",
+            content: "<div id='searchContainer'></div>",
+            id: "searchPane"
+        }));
+        accordion.addChild(new ContentPane({
+            title: "Measure",
+            content: "<div id='measureContainer'></div>",
+            id: "measurePane"
+        }));
+        accordion.startup();
+
+        // geocode search tool
+        var search = new esri.dijit.Geocoder({
+            map: map,
+            geocoders: mapConfig.Geocode.Geocoders,
+            arcgisGeocoder: mapConfig.Geocode.UseArcGISGeocoder,
+            autoComplete: true,
+            geocoderMenu: true,
+            highlightLocation: true,
+            minCharacters: 5
+        }, "searchContainer");
+        search.startup();
+
         // measure tool
         var measure = new esri.dijit.Measurement({
             map: map,
             defaultAreaUnit: esri.Units.SQUARE_MILES,
             defaultLengthUnit: esri.Units.FEET
-                          }, dom.byId("toolForm"));
+        }, dom.byId("measureContainer"));
         measure.startup();
         measure.setTool("distance",false);
     }

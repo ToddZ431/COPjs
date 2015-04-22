@@ -54,6 +54,13 @@
         text-align: center;
     }
 
+/* Tools */
+#searchContainer,
+#measureContainer {
+    height: 100%;
+    width: 100%;
+}
+
 #quickToggleDiv {
     width: 100%;
 }
